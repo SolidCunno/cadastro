@@ -1,9 +1,12 @@
+# Aqui decidi usar tkinter para uma GUI pois todo o cadastro era feito diretamente na planilha
+# openpyxl para manipular o arquivo .xlsx
+
 import tkinter as tk
 from tkinter import messagebox
 from openpyxl import Workbook, load_workbook
 import os
 
-# Definição da classe Pessoa
+
 class Pessoa:
     def __init__(self, nome, sobrenome, cpf, data_nascimento, rg, numero, email, cep, endereco, data_cadastro, responsavel, atividade):
         self.nome = nome
@@ -19,7 +22,7 @@ class Pessoa:
         self.responsavel = responsavel
         self.atividade = atividade
 
-# Função para salvar os dados no arquivo Excel
+
 def salvar_dados(pessoa):
     if os.path.exists('Cadastro_de_Clientes_geral.xlsx'):
         workbook = load_workbook('Cadastro_de_Clientes_geral.xlsx')
@@ -32,7 +35,7 @@ def salvar_dados(pessoa):
     sheet.append([pessoa.nome, pessoa.sobrenome, pessoa.cpf, pessoa.data_nascimento, pessoa.rg, pessoa.numero, pessoa.email, pessoa.cep, pessoa.endereco, pessoa.data_cadastro, pessoa.responsavel, pessoa.atividade])
     workbook.save('Cadastro_de_Clientes_geral.xlsx')
 
-# Função para buscar uma pessoa pelo nome
+
 def buscar_pessoa_por_nome(nome):
     if os.path.exists('Cadastro_de_Clientes_geral.xlsx'):
         workbook = load_workbook('Cadastro_de_Clientes_geral.xlsx')
@@ -42,7 +45,7 @@ def buscar_pessoa_por_nome(nome):
                 return Pessoa(*row)
     return None
 
-# Função para buscar uma pessoa pelo CPF
+
 def buscar_pessoa_por_cpf(cpf):
     if os.path.exists('Cadastro_de_Clientes_geral.xlsx'):
         workbook = load_workbook('Cadastro_de_Clientes_geral.xlsx')
@@ -52,7 +55,7 @@ def buscar_pessoa_por_cpf(cpf):
                 return Pessoa(*row)
     return None
 
-# Função para limpar os campos de entrada
+
 def limpar_campos():
     nome_entry.delete(0, tk.END)
     sobrenome_entry.delete(0, tk.END)
@@ -67,7 +70,7 @@ def limpar_campos():
     responsavel_entry.delete(0, tk.END)
     atividade_entry.delete(0, tk.END)
 
-# Função para salvar uma nova pessoa
+
 def salvar():
     nome = nome_entry.get()
     sobrenome = sobrenome_entry.get()
@@ -90,7 +93,7 @@ def salvar():
     else:
         messagebox.showwarning("Atenção", "Todos os campos são obrigatórios!")
 
-# Função para buscar uma pessoa pelo nome
+
 def buscar_por_nome():
     nome = busca_nome_entry.get()
     pessoa = buscar_pessoa_por_nome(nome)
@@ -100,7 +103,7 @@ def buscar_por_nome():
     else:
         messagebox.showinfo("Resultado", "Usuário não encontrado.")
 
-# Função para buscar uma pessoa pelo CPF
+
 def buscar_por_cpf():
     cpf = busca_cpf_entry.get()
     pessoa = buscar_pessoa_por_cpf(cpf)
@@ -110,7 +113,7 @@ def buscar_por_cpf():
     else:
         messagebox.showinfo("Resultado", "Usuário não encontrado.")
 
-# Configuração da interface gráfica
+# GUI
 root = tk.Tk()
 root.title("Projeto Alto do Coqueirinho Em Movimento")  # Adicionando o título da janela
 
